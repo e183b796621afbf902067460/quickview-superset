@@ -8,9 +8,10 @@ class iCBE(ABC):
     _E = None
     _ping = None
 
-    def __init__(self, api: Optional[str] = None, secret: Optional[str] = None, *args, **kwargs) -> None:
+    def __init__(self, api: Optional[str] = None, secret: Optional[str] = None, proxies: set = dict(),  *args, **kwargs) -> None:
         self._api = api
         self._secret = secret
+        self._proxies = proxies
 
         self.builder.build(
             key='endpoint', value=self.endpoint
@@ -27,17 +28,16 @@ class iCBE(ABC):
             self,
             method: str, url: str,
             params: Optional[dict] = None,
-            headers: Optional[dict] = None,
-            proxies: Optional[dict] = None
+            headers: Optional[dict] = None
     ):
         if method == 'get':
-            return r.get(self.endpoint + url, params=params, headers=headers, proxies=proxies)
+            return r.get(self.endpoint + url, params=params, headers=headers, proxies=self._proxies)
         elif method == 'post':
-            return r.post(self.endpoint + url, data=params, headers=headers, proxies=proxies)
+            return r.post(self.endpoint + url, data=params, headers=headers, proxies=self._proxies)
         elif method == 'delete':
-            return r.delete(self.endpoint + url, data=params, headers=headers, proxies=proxies)
+            return r.delete(self.endpoint + url, data=params, headers=headers, proxies=self._proxies)
         elif method == 'put':
-            return r.put(self.endpoint + url, data=params, headers=headers, proxies=proxies)
+            return r.put(self.endpoint + url, data=params, headers=headers, proxies=self._proxies)
         raise ConnectionError('Wrong method')
 
     @property
