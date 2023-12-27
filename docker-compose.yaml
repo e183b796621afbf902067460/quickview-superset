@@ -1,0 +1,44 @@
+version: "3.2"
+
+services:
+
+  postgres:
+    image: postgres:15.0-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_PASSWORD: superset
+      POSTGRES_USER: superset
+    networks:
+      - superset-tier
+
+  redis:
+    image: redis:7.0-alpine
+    restart: always
+    networks:
+      - superset-tier
+
+  superset:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      CACHE_REDIS_HOST: redis
+      CACHE_REDIS_PORT: 6379
+      CACHE_REDIS_DB: 1
+      CACHE_REDIS_URL: redis://redis:6379/1
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://superset:superset@postgres:5432/superset
+      SECRET_KEY:
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./superset/superset_config.py:/etc/superset/superset_config.py
+    networks:
+      - superset-tier
+
+networks:
+  superset-tier:
