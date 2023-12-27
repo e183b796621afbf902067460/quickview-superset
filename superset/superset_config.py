@@ -1,0 +1,18 @@
+import os
+
+
+CACHE_CONFIG = {
+    "CACHE_TYPE": "RedisCache",
+    "CACHE_DEFAULT_TIMEOUT": 300,
+    "CACHE_KEY_PREFIX": "superset_",
+    "CACHE_REDIS_HOST": os.getenv('CACHE_REDIS_HOST', None),
+    "CACHE_REDIS_PORT": os.getenv('CACHE_REDIS_PORT', None),
+    "CACHE_REDIS_DB": os.getenv('CACHE_REDIS_DB', None),
+    "CACHE_REDIS_URL": os.getenv('CACHE_REDIS_URL', None),
+}
+
+FILTER_STATE_CACHE_CONFIG = {**CACHE_CONFIG, "CACHE_KEY_PREFIX": "superset_filter_"}
+EXPLORE_FORM_DATA_CACHE_CONFIG = {**CACHE_CONFIG, "CACHE_KEY_PREFIX": "superset_explore_form_"}
+SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI', None)
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SECRET_KEY = os.getenv('SECRET_KEY', None)
