@@ -1,66 +1,36 @@
-# Medici
-It's a core framework for interacting with centralized cryptocurrency exchanges. The purpose of the framework is to implement the logic of the certain centralized cryptocurrency exchange. All exchanges inherit the [iCBE](https://github.com/e183b796621afbf902067460/medici/blob/master/medici/interfaces/exchanges/interface.py#L7) logic.
+# quickview-superset
 
-# Installation
-```
-pip install git+https://github.com/e183b796621afbf902067460/medici.git#egg=medici
-```
+[![license](https://img.shields.io/:license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-# Usage
-Let's build our first exchange:
-```python
-from requests.models import Response
+# Docker
 
-from typing import Optional
-import hmac
-import hashlib
-from urllib.parse import urlencode
+- Start all services to deploy needed environment:
 
-from medici.interfaces.exchanges.interface import iCBE
-from medici.decorators.permission.decorator import permission
-
-
-class BinanceSpotExchange(iCBE):
-    _E = 'https://api.binance.com'
-    _ping = '/api/v3/ping'
-
-    def __signature(self, params: dict):
-        return hmac.new(self.secret.encode('utf-8'), urlencode(params).replace('%40', '@').encode('utf-8'), hashlib.sha256).hexdigest()
-
-    def __header(self):
-        return {'X-MBX-APIKEY': self.api}
-
-    def aggTrades(
-            self,
-            symbol: str,
-            fromId: Optional[int] = None,
-            startTime: Optional[int] = None,
-            endTime: Optional[int] = None,
-            limit: Optional[int] = None
-    ) -> Response:
-        params: dict = {
-            'symbol': symbol,
-            'fromId': fromId,
-            'startTime': startTime,
-            'endTime': endTime,
-            'limit': limit
-        }
-
-        r = self._r(method='get', url='/api/v3/aggTrades', params=params)
-        assert isinstance(r, Response)
-        return r
-```
-The code above is implementation of the [Binance SPOT](https://binance-docs.github.io/apidocs/spot/en/#change-log) exchange.
-
-Example of exchange building:
-```python
-from c3f1nance.binance.Spot import BinanceSpotExchange
-
-
-exchange = BinanceSpotExchange()
+```bash
+docker-compose up -d --build --force-recreate
 ```
 
-And finally to call needed methods just do it:
-```python
-agg_trades = exchange.aggTrades(symbol='ETHUSDT')
+- Stop all services:
+
+```bash
+docker-compose down
 ```
+
+# Versions
+
+- The `latest` tag points to the latest release of the latest stable branch.
+
+# Volumes
+
+- `/superset/` — folder with superset configuration.
+
+# Configuration
+
+### Superset environment variables
+
+- `CACHE_REDIS_HOST`: Superset application Redis host.
+- `CACHE_REDIS_PORT`: Superset application Redis port.
+- `CACHE_REDIS_DB`: Superset application Redis database.
+- `CACHE_REDIS_URL`: Superset application Redis URL.
+- `SQLALCHEMY_DATABASE_URI`: Superset application PostgreSQL URI.
+- `SECRET_KEY`: .Superset application secret key.
