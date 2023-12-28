@@ -19,8 +19,9 @@ services:
       - superset-tier
 
   superset:
+    container_name: superset
     build:
-      context: .
+      context: ./superset
       dockerfile: Dockerfile
     restart: always
     environment:
@@ -35,8 +36,6 @@ services:
       - postgres
     ports:
       - "8088:8088"
-    volumes:
-      - ./superset/superset_config.py:/etc/superset/superset_config.py
     networks:
       - superset-tier
 
