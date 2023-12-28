@@ -10,11 +10,20 @@
 docker-compose up -d --build --force-recreate
 ```
 
+- Initialize PostgreSQL:
+
+```bash
+docker exec -it superset superset-init
+```
+
 - Stop all services:
 
 ```bash
-docker-compose down
+docker-compose down -v
 ```
+
+That's important to remove all the volumes because it could cause any error in the future setups.
+> dogacan. (2021). [Apache Superset error when installing locally using Docker Compose](https://stackoverflow.com/questions/68060234/apache-superset-error-when-installing-locally-using-docker-compose).
 
 # Versions
 
