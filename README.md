@@ -37,7 +37,7 @@ That's important to remove all the volumes because it could cause any error in t
 
 ### Superset environment variables
 
-- `SECRET_KEY`: .Superset application secret key.
+- `SECRET_KEY`: Superset application secret key.
 
 ### PostgreSQL environment variables
 
