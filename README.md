@@ -37,9 +37,15 @@ That's important to remove all the volumes because it could cause any error in t
 
 ### Superset environment variables
 
+- `SECRET_KEY`: .Superset application secret key.
+
+### PostgreSQL environment variables
+
+- `SQLALCHEMY_DATABASE_URI`: Superset application PostgreSQL URI.
+
+### Redis environment variables
+
 - `CACHE_REDIS_HOST`: Superset application Redis host.
 - `CACHE_REDIS_PORT`: Superset application Redis port.
 - `CACHE_REDIS_DB`: Superset application Redis database.
 - `CACHE_REDIS_URL`: Superset application Redis URL.
-- `SQLALCHEMY_DATABASE_URI`: Superset application PostgreSQL URI.
-- `SECRET_KEY`: .Superset application secret key.
