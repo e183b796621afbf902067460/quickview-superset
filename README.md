@@ -31,21 +31,16 @@ That's important to remove all the volumes because it could cause any error in t
 
 # Volumes
 
-- `/superset/` — folder with superset configuration.
+- `/etc/superset/` — folder with superset configuration.
+- `/app/docker-entrypoint-initdb.d/` — scripts to run on Apache Superset container start.
+- `/app/docker-entrypoint-superset-on-startup.sh` — script to run Apache Superset with pre-configured assets.
 
 # Configuration
+
+### Node environment variables
+
+- `WSS_NODE_PROVIDER`: WebSocket node provider. 
 
 ### Superset environment variables
 
 - `SECRET_KEY`: Superset application secret key.
-
-### PostgreSQL environment variables
-
-- `SQLALCHEMY_DATABASE_URI`: Superset application PostgreSQL URI.
-
-### Redis environment variables
-
-- `CACHE_REDIS_HOST`: Superset application Redis host.
-- `CACHE_REDIS_PORT`: Superset application Redis port.
-- `CACHE_REDIS_DB`: Superset application Redis database.
-- `CACHE_REDIS_URL`: Superset application Redis URL.
