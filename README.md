@@ -10,12 +10,6 @@
 docker-compose up -d --build --force-recreate
 ```
 
-- Initialize PostgreSQL:
-
-```bash
-docker exec -it superset superset-init
-```
-
 - Stop all services:
 
 ```bash
