@@ -61,6 +61,12 @@ services:
     networks:
       - superset-tier
 
+  redis:
+    image: redis:7.0-alpine
+    restart: always
+    networks:
+      - superset-tier
+
   postgres:
     image: postgres:15.0-alpine
     restart: always
@@ -68,12 +74,13 @@ services:
       POSTGRES_DB: superset
       POSTGRES_PASSWORD: superset
       POSTGRES_USER: superset
-    networks:
-      - superset-tier
-
-  redis:
-    image: redis:7.0-alpine
-    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    depends_on:
+      - redis
     networks:
       - superset-tier
 
@@ -88,9 +95,25 @@ services:
       CACHE_REDIS_PORT: 6379
       CACHE_REDIS_DB: 1
       CACHE_REDIS_URL: redis://redis:6379/1
+
       SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://superset:superset@postgres:5432/superset
 
+      SUPERSET_USERNAME: admin
+      SUPERSET_PASSWORD: admin
+      SUPERSET_FIRSTNAME: admin
+      SUPERSET_LASTNAME: admin
+      SUPERSET_EMAIL: admin@mail.ru
+      SUPERSET_HOST: superset
+      SUPERSET_PORT: 8088
+
       SECRET_KEY:
+    depends_on:
+      postgres:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+    healthcheck:
+      disable: true
     ports:
       - "8088:8088"
     networks:
