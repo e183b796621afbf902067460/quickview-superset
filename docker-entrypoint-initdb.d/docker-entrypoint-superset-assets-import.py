@@ -5,6 +5,8 @@ import typing
 import time
 
 
+CLICKHOUSE_PASSWORD: typing.Optional[str] = os.getenv('CLICKHOUSE_PASSWORD', None)
+
 SUPERSET_HOST: typing.Optional[str] = os.getenv('SUPERSET_HOST', None)
 SUPERSET_PORT: typing.Optional[int] = os.getenv('SUPERSET_PORT', None)
 SUPERSET_USERNAME: typing.Optional[str] = os.getenv('SUPERSET_USERNAME', None)
@@ -80,9 +82,8 @@ files = {
     )
 }
 
-# TODO hardcode database credentials to except dynamic matching
 payload = {
-    'passwords': '{"databases/ClickHouse.yaml": "clickhouse"}'
+    'passwords': f'{{"databases/ClickHouse.yaml": {CLICKHOUSE_PASSWORD}}}'
 }
 headers = {
     "Authorization": f"Bearer {jwt_token}",
