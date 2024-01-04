@@ -31,10 +31,28 @@ That's important to remove all the volumes because it could cause any error in t
 
 # Configuration
 
-### Node environment variables
+### Redis environment variables
 
-- `WSS_NODE_PROVIDER`: WebSocket node provider. 
+- `CACHE_REDIS_HOST`: Redis application host.
+- `CACHE_REDIS_PORT`: Redis application port.
+- `CACHE_REDIS_DB`: Redis application database name.
+- `CACHE_REDIS_URL`: Redis application database URL.
+
+### PostgreSQL environment variables
+
+- `SQLALCHEMY_DATABASE_URI`: PostgreSQL application database URI to connect.
+
+### ClickHouse environment variables
+
+- `CLICKHOUSE_PASSWORD`: ClickHouse application database password. 
 
 ### Superset environment variables
 
-- `SECRET_KEY`: Superset application secret key.
+- `SUPERSET_USERNAME`: Apache Superset application username.
+- `SUPERSET_PASSWORD`: Apache Superset application password.
+- `SUPERSET_FIRSTNAME`: Apache Superset application firstname.
+- `SUPERSET_LASTNAME`: Apache Superset application lastname.
+- `SUPERSET_EMAIL`: Apache Superset application e-mail.
+- `SUPERSET_HOST`: Apache Superset application host.
+- `SUPERSET_PORT`: Apache Superset application port.
+- `SECRET_KEY`: Apache Superset application secret key.
