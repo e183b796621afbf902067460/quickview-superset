@@ -94,6 +94,7 @@ services:
       CACHE_REDIS_URL: redis://redis:6379/1
 
       SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://superset:superset@postgres:5432/superset
+      CLICKHOUSE_PASSWORD: clickhouse
 
       SUPERSET_USERNAME: admin
       SUPERSET_PASSWORD: admin
