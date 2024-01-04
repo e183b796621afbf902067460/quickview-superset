@@ -83,7 +83,7 @@ files = {
 }
 
 payload = {
-    'passwords': f'{{"databases/ClickHouse.yaml": {CLICKHOUSE_PASSWORD}}}'
+    'passwords': f'{{"databases/ClickHouse.yaml": "{CLICKHOUSE_PASSWORD}"}}'
 }
 headers = {
     "Authorization": f"Bearer {jwt_token}",
