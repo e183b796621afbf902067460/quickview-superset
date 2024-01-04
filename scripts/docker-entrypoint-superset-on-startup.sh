@@ -6,6 +6,3 @@ for script in docker-entrypoint-initdb.d/*
       bash "$script"
     fi
   done
-
-echo "Superset startup ended."
-echo "-----------------------"
