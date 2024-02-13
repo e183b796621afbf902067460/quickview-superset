@@ -126,8 +126,6 @@ services:
       WSS_NODE_PROVIDER:
 
       BOOTSTRAP_SERVERS: kafka:9092
-      KAFKA_BROKER_URL: kafka
-      KAFKA_BROKER_PORT: 9092
       TOPIC_NAME: topic
     depends_on:
       clickhouse:
