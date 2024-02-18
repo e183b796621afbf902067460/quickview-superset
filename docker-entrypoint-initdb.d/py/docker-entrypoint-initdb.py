@@ -2,7 +2,6 @@ import requests
 import os
 import typing
 import logging
-
 import time
 
 
@@ -77,8 +76,8 @@ jwt_token = login(headers=headers, payload=payload)
 # export assets
 files = {
     'bundle': (
-        'docker-entrypoint-superset-assets-export.zip',
-        open("/app/docker-entrypoint-initdb.d/docker-entrypoint-superset-assets-export.zip", "rb"),
+        'docker-entrypoint-initdb.zip',
+        open("/app/docker-entrypoint-initdb.d/docker-entrypoint-initdb.zip", "rb"),
         'application/zip'
     )
 }
