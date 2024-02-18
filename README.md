@@ -26,8 +26,7 @@ That's important to remove all the volumes because it could cause any error in t
 # Volumes
 
 - `/etc/superset/` — folder with superset configuration.
-- `/app/docker-entrypoint-initdb.d/` — scripts to run on Apache Superset container start.
-- `/app/docker-entrypoint-superset-on-startup.sh` — script to run Apache Superset with pre-configured assets.
+- `/docker-entrypoint-initdb.d/` — scripts to run on Apache Superset container start.
 
 # Configuration
 
