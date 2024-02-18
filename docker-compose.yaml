@@ -37,16 +37,11 @@ services:
 
   clickhouse:
     build:
-      context: ./images/clickhouse
+      context: ./clickhouse
       dockerfile: Dockerfile
-      args:
-        - KAFKA_BROKER_LIST=kafka:9092
-        - KAFKA_TOPIC_LIST=topic
-        - KAFKA_GROUP_NAME=q_real_time_tx_processing_ch
     environment:
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
       CLICKHOUSE_HOST: 0.0.0.0
-      CLICKHOUSE_PASSWORD: clickhouse
     ports:
       - '8123:8123'
     healthcheck:

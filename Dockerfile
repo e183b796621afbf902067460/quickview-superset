@@ -4,9 +4,11 @@ USER root
 RUN pip install clickhouse-connect
 
 COPY ./etc/superset/superset_config.py /etc/superset/superset_config.py
-COPY ./docker-entrypoint-initdb.d/ /app/docker-entrypoint-initdb.d/
-COPY ./scripts/docker-entrypoint-superset-on-startup.sh /app/docker-entrypoint-superset-on-startup.sh
+
+COPY ./docker-entrypoint-initdb.d/py /app/docker-entrypoint-initdb.d/
+COPY ./docker-entrypoint-initdb.d/sh /app/docker-entrypoint-initdb.d/
+COPY ./docker-entrypoint-initdb.d/zip /app/docker-entrypoint-initdb.d/
 
 ENV SUPERSET_CONFIG_PATH /etc/superset/superset_config.py
 
-CMD ["bash", "docker-entrypoint-superset-on-startup.sh"]
+CMD ["bash", "/app/docker-entrypoint-initdb.d/docker-entrypoint-initdb.sh"]

@@ -1,7 +1,7 @@
 import requests
 import os
 import typing
-
+import logging
 import time
 
 
@@ -76,8 +76,8 @@ jwt_token = login(headers=headers, payload=payload)
 # export assets
 files = {
     'bundle': (
-        'docker-entrypoint-superset-assets-export.zip',
-        open("/app/docker-entrypoint-initdb.d/docker-entrypoint-superset-assets-export.zip", "rb"),
+        'docker-entrypoint-initdb.zip',
+        open("/app/docker-entrypoint-initdb.d/docker-entrypoint-initdb.zip", "rb"),
         'application/zip'
     )
 }
@@ -91,5 +91,4 @@ headers = {
 }
 assets = assets_export(headers=headers, payload=payload, files=files)
 
-print(f'Dashboard import response: {assets.status_code}.')
-
+logging.info(f'Dashboard import response: {assets.status_code}.')
