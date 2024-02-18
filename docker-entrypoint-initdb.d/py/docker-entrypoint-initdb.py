@@ -1,6 +1,7 @@
 import requests
 import os
 import typing
+import logging
 
 import time
 
@@ -91,5 +92,4 @@ headers = {
 }
 assets = assets_export(headers=headers, payload=payload, files=files)
 
-print(f'Dashboard import response: {assets.status_code}.')
-
+logging.info(f'Dashboard import response: {assets.status_code}.')
